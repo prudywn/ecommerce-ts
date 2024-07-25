@@ -19,7 +19,7 @@ This is an unfinished e-commerce platform project. Your task is to pick up where
     MONGO_URI=your_mongodb_connection_string
     PORT=5000
     ```
-4. Run the backend server: `npm run dev`
+4. Run the backend server: `npm start`
 
 ### Frontend
 
