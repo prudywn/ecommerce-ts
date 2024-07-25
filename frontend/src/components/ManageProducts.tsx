@@ -101,7 +101,7 @@ const ManageProducts: React.FC = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className=" p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Manage Products</h2>
             <div ref={formRef} className="mb-4 space-y-2">
                 {editProduct ? (
@@ -111,7 +111,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Name"
                             value={editProduct.name}
                             onChange={(e) => setEditProduct({ ...editProduct, name: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.name && <p className="text-red-500">{errors.name}</p>}
                         <input
@@ -119,7 +119,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Price"
                             value={editProduct.price}
                             onChange={(e) => setEditProduct({ ...editProduct, price: parseFloat(e.target.value) })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.price && <p className="text-red-500">{errors.price}</p>}
                         <input
@@ -127,7 +127,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Description"
                             value={editProduct.description}
                             onChange={(e) => setEditProduct({ ...editProduct, description: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.description && <p className="text-red-500">{errors.description}</p>}
                         <input
@@ -135,7 +135,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Image URL"
                             value={editProduct.imageUrl}
                             onChange={(e) => setEditProduct({ ...editProduct, imageUrl: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.imageUrl && <p className="text-red-500">{errors.imageUrl}</p>}
                         <input
@@ -143,7 +143,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Quantity"
                             value={editProduct.quantity}
                             onChange={(e) => setEditProduct({ ...editProduct, quantity: parseInt(e.target.value) })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.quantity && <p className="text-red-500">{errors.quantity}</p>}
                         <input
@@ -151,7 +151,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Category"
                             value={editProduct.category}
                             onChange={(e) => setEditProduct({ ...editProduct, category: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.category && <p className="text-red-500">{errors.category}</p>}
                         <button
@@ -174,7 +174,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Name"
                             value={newProduct.name}
                             onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.name && <p className="text-red-500">{errors.name}</p>}
                         <input
@@ -182,7 +182,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Price"
                             value={newProduct.price}
                             onChange={(e) => setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.price && <p className="text-red-500">{errors.price}</p>}
                         <input
@@ -190,7 +190,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Description"
                             value={newProduct.description}
                             onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.description && <p className="text-red-500">{errors.description}</p>}
                         <input
@@ -198,7 +198,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Image URL"
                             value={newProduct.imageUrl}
                             onChange={(e) => setNewProduct({ ...newProduct, imageUrl: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.imageUrl && <p className="text-red-500">{errors.imageUrl}</p>}
                         <input
@@ -206,7 +206,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Quantity"
                             value={newProduct.quantity}
                             onChange={(e) => setNewProduct({ ...newProduct, quantity: parseInt(e.target.value) })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.quantity && <p className="text-red-500">{errors.quantity}</p>}
                         <input
@@ -214,7 +214,7 @@ const ManageProducts: React.FC = () => {
                             placeholder="Category"
                             value={newProduct.category}
                             onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full text-black p-2 border border-gray-300 rounded"
                         />
                         {errors.category && <p className="text-red-500">{errors.category}</p>}
                         <button

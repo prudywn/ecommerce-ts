@@ -99,7 +99,7 @@ const CartPage: React.FC = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-8">Shopping Cart</h1>
         {error && (
@@ -109,7 +109,7 @@ const CartPage: React.FC = () => {
         )}
         <div className="space-y-6">
           {cart?.items.length === 0 ? (
-            <p className="text-center text-gray-600">Your cart is empty.</p>
+            <p className="text-center text-gray-400 text-xl">Your cart is empty.</p>
           ) : (
             <>
               {cart?.items.map(item => {

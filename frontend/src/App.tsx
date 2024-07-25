@@ -12,14 +12,17 @@ import OrderPage from './pages/OrderPage';
 import AdminDashboard from './components/AdminDashoard';
 import ForYouPage from './pages/ForYouPage';
 import PurchasePage from './pages/PurchasePage';
+import ThemeSwitcher from './components/ThemeSwitcher';
+import './App.css'
 
 const App: React.FC = () => {
   
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen ">
       <AuthProvider>
         <Navbar />
+        <ThemeSwitcher />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />

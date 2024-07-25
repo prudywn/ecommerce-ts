@@ -115,11 +115,11 @@ const ProductPage: React.FC = () => {
     if (!product) return <div>Loading...</div>;
 
     return (
-        <div className="min-h-screen bg-gray-100 py-8">
+        <div className="min-h-screen py-8">
             <div className="container mx-auto px-4">
-                <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="bg-white dark:bg-slate-200 rounded-lg shadow-md p-6">
                     <img src={product.imageUrl} alt={product.name} className="w-full h-64 object-cover mb-4" />
-                    <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+                    <h1 className="text-gray-800 text-4xl font-bold mb-4">{product.name}</h1>
                     <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
                     <p className="text-gray-800 mb-4">{product.description}</p>
                     <div className="mb-4">
@@ -129,7 +129,7 @@ const ProductPage: React.FC = () => {
                             id="quantity" 
                             value={quantity}
                             onChange={(e) => setQuantity(parseInt(e.target.value))}
-                            className="w-20 border rounded px-2 py-1"
+                            className="w-20 border rounded px-2 py-1 text-black"
                             min="1"
                         />
                         {quantityError && <p className="text-red-500 text-sm mt-2">{quantityError}</p>}
@@ -141,7 +141,7 @@ const ProductPage: React.FC = () => {
                         Add to Cart
                     </button>
                     <div className="mt-8">
-                        <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
+                        <h2 className="text-2xl font-semibold mb-4 text-black">Reviews</h2>
                         <div>
                             {product.reviews.map(review => (
                                 <div key={review._id} className="border-b border-gray-300 mb-4 pb-4">
@@ -151,7 +151,7 @@ const ProductPage: React.FC = () => {
                             ))}
                         </div>
                         <div className="mt-6">
-                            <h2 className="text-xl font-semibold mb-4">Add a Review</h2>
+                            <h2 className="text-xl font-semibold mb-4 text-black">Add a Review</h2>
                             <div className="mb-4">
                                 <label htmlFor="rating" className="block text-gray-700">Rating:</label>
                                 <input 
@@ -159,7 +159,7 @@ const ProductPage: React.FC = () => {
                                     id="rating" 
                                     value={rating}
                                     onChange={(e) => setRating(parseInt(e.target.value))}
-                                    className="w-20 border rounded px-2 py-1"
+                                    className="w-20 border rounded px-2 py-1 text-black"
                                     min="1"
                                     max="5"
                                 />
@@ -170,7 +170,7 @@ const ProductPage: React.FC = () => {
                                     id="comment" 
                                     value={comment}
                                     onChange={(e) => setComment(e.target.value)}
-                                    className="w-full border rounded px-2 py-1"
+                                    className="w-full border rounded px-2 py-1 text-black"
                                     rows={4}
                                 ></textarea>
                                 {reviewError && <p className="text-red-500 text-sm mt-2">{reviewError}</p>}
