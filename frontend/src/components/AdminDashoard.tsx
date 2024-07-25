@@ -7,7 +7,7 @@ import ManageUsers from './ManageUsers';
 
 const AdminDashboard: React.FC = () => {
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen ">
             <nav className="bg-blue-600 p-4">
                 <ul className="flex space-x-4 text-white">
                     <li>

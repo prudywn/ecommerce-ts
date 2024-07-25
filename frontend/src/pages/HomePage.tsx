@@ -63,7 +63,7 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className=" min-h-screen flex flex-col items-center">
       {/* Hero Section */}
       <motion.header
         className="w-full bg-blue-600 text-white py-20 flex flex-col items-center justify-center text-center"

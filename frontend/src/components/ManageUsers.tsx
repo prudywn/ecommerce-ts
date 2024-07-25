@@ -12,6 +12,7 @@ const ManageUsers: React.FC = () => {
         password: '',
         role: 'user',
     });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         fetchUsers();
@@ -26,7 +27,27 @@ const ManageUsers: React.FC = () => {
         }
     };
 
+    const validateForm = () => {
+        let newErrors: { [key: string]: string } = {};
+
+        if (!newUser.name) newErrors.name = 'Name is required';
+        if (!newUser.email) {
+            newErrors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(newUser.email)) {
+            newErrors.email = 'Email format is invalid';
+        } else if (users.some((user) => user.email === newUser.email)) {
+            newErrors.email = 'Email already exists';
+        }
+        if (!newUser.password) newErrors.password = 'Password is required';
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleCreateUser = async () => {
+        if (!validateForm()) return;
+
         try {
             const response = await axios.post(`${BASE_URL}/api/users/users`, newUser);
             setUsers([...users, response.data]);
@@ -36,6 +57,7 @@ const ManageUsers: React.FC = () => {
                 password: '',
                 role: 'user',
             });
+            setErrors({});
         } catch (error) {
             console.error('Error creating user:', error);
         }
@@ -51,7 +73,7 @@ const ManageUsers: React.FC = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
             <div className="mb-4 space-y-2">
                 <input
@@ -59,22 +81,25 @@ const ManageUsers: React.FC = () => {
                     placeholder="Name"
                     value={newUser.name}
                     onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded"
+                    className="w-full p-2 text-black border border-gray-300 rounded"
                 />
+                {errors.name && <p className="text-red-600">{errors.name}</p>}
                 <input
                     type="email"
                     placeholder="Email"
                     value={newUser.email}
                     onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded"
+                    className="w-full p-2 text-black border border-gray-300 rounded"
                 />
+                {errors.email && <p className="text-red-600">{errors.email}</p>}
                 <input
                     type="password"
                     placeholder="Password"
                     value={newUser.password}
                     onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded"
+                    className="w-full p-2 text-black border border-gray-300 rounded"
                 />
+                {errors.password && <p className="text-red-600">{errors.password}</p>}
                 <button
                     onClick={handleCreateUser}
                     className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700"

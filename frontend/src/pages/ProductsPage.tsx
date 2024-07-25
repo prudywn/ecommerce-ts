@@ -45,7 +45,7 @@ const ProductsPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-8">Products</h1>
         {error && (
@@ -59,7 +59,7 @@ const ProductsPage: React.FC = () => {
             placeholder="Search products..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full p-2 border border-gray-300 rounded-md text-black"
           />
         </div>
         {loading ? (
@@ -96,7 +96,7 @@ const ProductsPage: React.FC = () => {
                         className="w-full h-48 object-cover"
                       />
                       <div className="p-4">
-                        <h2 className="text-lg font-semibold">{product.name}</h2>
+                        <h2 className="text-gray-800 text-lg font-semibold">{product.name}</h2>
                         <p className="text-gray-600">${product.price.toFixed(2)}</p>
                       </div>
                     </Link>

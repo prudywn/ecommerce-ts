@@ -26,12 +26,14 @@ const OrderPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [cartId, setCartId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null); // State for errors
+  const [loading, setLoading] = useState<boolean>(false); // State for loading
   const location = useLocation();
   const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
+      setLoading(true); // Set loading to true before fetching
       try {
         if (token) {
           const data = await getOrders(token);
@@ -40,6 +42,8 @@ const OrderPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching orders:', error);
         setError('Failed to fetch orders. Please try again later.');
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -90,7 +94,9 @@ const OrderPage: React.FC = () => {
           {error}
         </ErrorMessage>
       )}
-      {orders.length === 0 && !error ? (
+      {loading ? (
+        <LoadingMessage>Loading...</LoadingMessage>
+      ) : orders.length === 0 && !error ? (
         <NoOrdersMessage>You have no orders yet.</NoOrdersMessage>
       ) : (
         <OrderTable>
@@ -172,6 +178,7 @@ const OrderTable = styled.table`
 
   th {
     background-color: #f4f4f4;
+    color: #000;
   }
 
   .order-item {
@@ -208,5 +215,12 @@ const NoOrdersMessage = styled.p`
   text-align: center;
   font-size: 18px;
   color: #6c757d;
+  margin-top: 20px;
+`;
+
+const LoadingMessage = styled.p`
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
   margin-top: 20px;
 `;
