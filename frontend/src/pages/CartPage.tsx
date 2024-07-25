@@ -80,7 +80,7 @@ const CartPage: React.FC = () => {
     navigate('/order', { state: { cartId: cart?._id } });
   };
 
-  const handleAddToCart = async (productId: string, quantity: number) => {
+  async (productId: string, quantity: number) => {
     
     if (quantity <= 0) {
       alert('Quantity must be greater than zero.');
