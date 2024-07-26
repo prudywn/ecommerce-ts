@@ -14,7 +14,6 @@ const ForYouPage: React.FC = () => {
   useEffect(() => {
     const fetchRecommendations = async () => {
       const token = localStorage.getItem('token');
-      console.log('Token:', token); // Log the token
 
       try {
         const { data } = await axios.get<Product[]>(`${BASE_URL}/api/recommendations/recommendations`, {
