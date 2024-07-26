@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import Cart from '../models/Cart';
 import Product from '../models/Products';
+import recordUserActivity from '../middlewares/recordUserActivities';
 
 const router = Router();
 
@@ -16,7 +17,7 @@ router.get('/cart', async (req, res) => {
 });
 
 // Add item to cart
-router.post('/cart', async (req, res) => {
+router.post('/cart', recordUserActivity('added_to_cart') ,async (req, res) => {
     const { productId, quantity } = req.body;
 
     try {

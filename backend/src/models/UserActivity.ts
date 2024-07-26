@@ -5,7 +5,7 @@ import mongoose, { Schema, model, Document, Types } from 'mongoose';
 export interface IUserActivity extends Document {
   userId: mongoose.Types.ObjectId;
   productId: mongoose.Types.ObjectId;
-  action: 'viewed' | 'added_to_cart' | 'purchased';
+  action: 'viewed' | 'added_to_cart' | 'ordered';
   timestamp: Date;
 }
 

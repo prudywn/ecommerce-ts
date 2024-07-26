@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import Order from '../models/Order';
 import Cart from '../models/Cart';
 import authMiddleware from '../middlewares/authMiddleware';
+import recordUserActivity from '../middlewares/recordUserActivities';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ interface AuthRequest extends Request {
 }
 
 // Place a new order
-router.post('/orders', authMiddleware, async (req: AuthRequest, res: Response) => {
+router.post('/orders', authMiddleware, recordUserActivity('ordered'), async (req: AuthRequest, res: Response) => {
   try {
     const { cartId } = req.body;
     const cart = await Cart.findById(cartId);
@@ -26,7 +27,7 @@ router.post('/orders', authMiddleware, async (req: AuthRequest, res: Response) =
     });
 
     const newOrder = await order.save();
-    console.log('New order created:', newOrder); // Debug log
+    //console.log('New order created:', newOrder); // Debug log
     await Cart.findByIdAndDelete(cartId); // Clear the cart after placing an order
     res.status(201).json(newOrder);
   } catch (error) {

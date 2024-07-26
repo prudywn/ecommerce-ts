@@ -9,8 +9,8 @@ interface OrderItem {
     _id: string;
     name: string;
     price: number;
-    imageUrl: string; // Added imageUrl property
-  } | null;  // Allow productId to be null
+    imageUrl: string;
+  } | null;
   quantity: number;
 }
 
@@ -25,15 +25,15 @@ interface Order {
 const OrderPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [cartId, setCartId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null); // State for errors
-  const [loading, setLoading] = useState<boolean>(false); // State for loading
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const location = useLocation();
   const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
-      setLoading(true); // Set loading to true before fetching
+      setLoading(true);
       try {
         if (token) {
           const data = await getOrders(token);
@@ -43,7 +43,7 @@ const OrderPage: React.FC = () => {
         console.error('Error fetching orders:', error);
         setError('Failed to fetch orders. Please try again later.');
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
 
@@ -87,13 +87,9 @@ const OrderPage: React.FC = () => {
 
   return (
     <OrderPageContainer>
-      <h1 className='flex items-center justify-center font-semibold text-4xl'>Orders</h1>
-      {cartId && <p className='text-center mt-4'>Order placed for cart: {cartId}</p>}
-      {error && (
-        <ErrorMessage>
-          {error}
-        </ErrorMessage>
-      )}
+      <h1 className="flex items-center justify-center font-semibold text-4xl">Orders</h1>
+      {cartId && <p className="text-center mt-4">Order placed for cart: {cartId}</p>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       {loading ? (
         <LoadingMessage>Loading...</LoadingMessage>
       ) : orders.length === 0 && !error ? (
@@ -105,16 +101,18 @@ const OrderPage: React.FC = () => {
               <th>ID</th>
               <th>Items</th>
               <th>Status</th>
+              <th>Created At</th>
+              <th>Updated At</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>
-                  {order.items.map(item => (
-                    <div key={item.productId?._id} className='order-item'>
+                  {order.items.map((item) => (
+                    <div key={item.productId?._id} className="order-item">
                       {item.productId ? (
                         <>
                           <ProductImage src={item.productId.imageUrl} alt={item.productId.name} />
@@ -131,17 +129,19 @@ const OrderPage: React.FC = () => {
                   ))}
                 </td>
                 <td>{order.status}</td>
+                <td>{new Date(order.createdAt).toLocaleString()}</td>
+                <td>{new Date(order.updatedAt).toLocaleString()}</td>
                 <td>
-                  <div className='flex space-x-4'>
+                  <div className="flex space-x-4">
                     <button
-                      className='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300'
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
                       onClick={() => handleDeleteOrder(order._id)}
                     >
                       Delete
                     </button>
                     {order.status === 'Shipped' && (
                       <button
-                        className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300'
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
                         onClick={() => handleConfirmOrder(order._id)}
                       >
                         Confirm
@@ -162,7 +162,7 @@ export default OrderPage;
 
 const OrderPageContainer = styled.div`
   padding: 20px;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 `;
 

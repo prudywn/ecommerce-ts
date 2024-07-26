@@ -121,7 +121,7 @@ const CartPage: React.FC = () => {
                     <div className="flex items-center">
                       <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover mr-4" />
                       <div>
-                        <h2 className="text-lg font-semibold">{product.name}</h2>
+                        <h2 className="text-lg font-semibold text-black">{product.name}</h2>
                         <p className="text-gray-600">${product.price.toFixed(2)}</p>
                         <p className="text-gray-600">Quantity: {item.quantity}</p>
                       </div>
