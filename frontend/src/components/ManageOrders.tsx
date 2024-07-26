@@ -46,15 +46,15 @@ const ManageOrders: React.FC = () => {
     };
 
     return (
-        <div className=" p-6 rounded-lg shadow-md">
+        <div className="p-4 sm:p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Manage Orders</h2>
             <ul className="space-y-2">
                 {orders.map((order) => (
-                    <li key={order._id} className="p-4 border border-gray-300 rounded flex justify-between">
-                        <span>
+                    <li key={order._id} className="p-4 border border-gray-300 rounded flex flex-col md:flex-row justify-between">
+                        <span className="mb-2 md:mb-0">
                             Order #{order._id} - {order.status} - ${order.totalAmount}
                         </span>
-                        <div className="space-x-2">
+                        <div className="space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row">
                             <button
                                 onClick={() => handleUpdateOrderStatus(order._id, 'Processing')}
                                 className="bg-yellow-600 text-white p-2 rounded hover:bg-yellow-700"
