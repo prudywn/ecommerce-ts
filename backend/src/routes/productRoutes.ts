@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import Product from '../models/Products';
+import recordUserActivity from '../middlewares/recordUserActivities';
 
 const router = express.Router();
 
@@ -49,7 +50,7 @@ router.post('/products', async (req: Request, res: Response) => {
 });
 
 // Get a single product
-router.get('/products/:id', getProduct, (req: Request, res: Response) => {
+router.get('/products/:id', getProduct, recordUserActivity('viewed'), (req: Request, res: Response) => {
     res.json(res.locals.product);
 });
 
