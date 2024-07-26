@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
+import { body, validationResult } from 'express-validator';
 import Product from '../models/Products';
 import recordUserActivity from '../middlewares/recordUserActivities';
 
@@ -19,6 +20,23 @@ export const getProduct = async (req: Request, res: Response, next: NextFunction
     next();
 };
 
+// Middleware for validation
+const validateProduct = [
+    body('name').notEmpty().withMessage('Name is required'),
+    body('price').isFloat({ gt: 0 }).withMessage('Price must be greater than 0'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('imageUrl').isURL().withMessage('Invalid image URL'),
+    body('quantity').isInt({ gt: 0 }).withMessage('Quantity must be greater than 0'),
+    body('category').notEmpty().withMessage('Category is required'),
+    (req: Request, res: Response, next: NextFunction) => {
+        const errors = validationResult(req).formatWith(({ msg }) => msg);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        next();
+    }
+];
+
 // Get all products
 router.get('/products', async (req: Request, res: Response) => {
     try {
@@ -30,7 +48,7 @@ router.get('/products', async (req: Request, res: Response) => {
 });
 
 // Create a new product
-router.post('/products', async (req: Request, res: Response) => {
+router.post('/products', validateProduct, async (req: Request, res: Response) => {
     const product = new Product({
         name: req.body.name,
         price: req.body.price,
@@ -38,14 +56,13 @@ router.post('/products', async (req: Request, res: Response) => {
         imageUrl: req.body.imageUrl,
         quantity: req.body.quantity,
         category: req.body.category,
-        
     });
 
     try {
         const newProduct = await product.save();
         res.status(201).json(newProduct);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -55,7 +72,7 @@ router.get('/products/:id', getProduct, recordUserActivity('viewed'), (req: Requ
 });
 
 // Update a product
-router.patch('/products/:id', getProduct, async (req: Request, res: Response) => {
+router.patch('/products/:id', getProduct, validateProduct, async (req: Request, res: Response) => {
     if (req.body.name != null) {
         res.locals.product.name = req.body.name;
     }
@@ -73,7 +90,7 @@ router.patch('/products/:id', getProduct, async (req: Request, res: Response) =>
     }
     if (req.body.category != null) {
         res.locals.product.category = req.body.category;
-        }
+    }
     try {
         const updatedProduct = await res.locals.product.save();
         res.json(updatedProduct);
