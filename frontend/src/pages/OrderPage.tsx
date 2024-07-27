@@ -112,7 +112,7 @@ const OrderPage: React.FC = () => {
                 <td>{order._id}</td>
                 <td>
                   {order.items.map((item) => (
-                    <div key={item.productId?._id} className="order-item">
+                    <div key={item.productId?._id} className="order-item flex flex-col md:flex-row">
                       {item.productId ? (
                         <>
                           <ProductImage src={item.productId.imageUrl} alt={item.productId.name} />
@@ -132,7 +132,7 @@ const OrderPage: React.FC = () => {
                 <td>{new Date(order.createdAt).toLocaleString()}</td>
                 <td>{new Date(order.updatedAt).toLocaleString()}</td>
                 <td>
-                  <div className="flex space-x-4">
+                  <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
                     <button
                       className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
                       onClick={() => handleDeleteOrder(order._id)}
@@ -162,36 +162,25 @@ export default OrderPage;
 
 const OrderPageContainer = styled.div`
   padding: 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const OrderTable = styled.table`
   width: 100%;
   border-collapse: collapse;
-
-  th, td {
+  th,
+  td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
   }
-
   th {
     background-color: #f4f4f4;
     color: #000;
-  }
-
-  .order-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    img {
-      margin-right: 10px;
-      max-width: 50px;
-      height: auto;
-      border-radius: 5px;
-    }
   }
 `;
 
